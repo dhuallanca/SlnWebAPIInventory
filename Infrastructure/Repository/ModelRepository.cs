@@ -8,13 +8,17 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repository
 {
-    // handle DB
-    public class ModelRepository : IRepository<Model>, IModelRepository, IDisposable
+    /// <summary>
+    /// Repository implement IRepository
+    /// Works with Data access
+    /// </summary>
+    public class ModelRepository : IModelRepository, IDisposable
     {
-        //private ModelContext _context;
-        // public ModelRepository(ModelContext context) { 
-        //    this._context = context
-        //}
+        private ModelContext _dbContext;
+        public ModelRepository(ModelContext context)
+        {
+            _dbContext = context;
+        }
         public Task<Model> CreateModel()
         {
             throw new NotImplementedException();

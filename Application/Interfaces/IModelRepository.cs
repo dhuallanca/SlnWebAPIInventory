@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+/// Interface that handle interaction with the repository from Infraestructure
 namespace Application.Interfaces
 {
     public interface IModelRepository : IRepositoryBase<Model>

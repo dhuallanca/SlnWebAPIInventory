@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Application.Interfaces
 {
+    /// <summary>
+    /// Base interfaces for handle model events
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface IRepositoryBase<T> where T : class
     {
         IEnumerable<T> GetAll();

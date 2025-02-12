@@ -13,3 +13,4 @@ F:\Curso-Net-Core\SlnInventoryProducts\Application\obj\Debug\net8.0\Application.
 F:\Curso-Net-Core\SlnInventoryProducts\Application\obj\Debug\net8.0\refint\Application.dll
 F:\Curso-Net-Core\SlnInventoryProducts\Application\obj\Debug\net8.0\Application.pdb
 F:\Curso-Net-Core\SlnInventoryProducts\Application\obj\Debug\net8.0\ref\Application.dll
+F:\Curso-Net-Core\SlnInventoryProducts\Application\obj\Debug\net8.0\Application.sourcelink.json
