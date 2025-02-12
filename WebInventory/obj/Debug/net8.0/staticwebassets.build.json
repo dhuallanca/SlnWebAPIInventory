@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "FVdAbZPFMzmqYoWweS3eoUI8pO65SD2Yllc/4EFT6IY=",
+  "Source": "WebInventory",
+  "BasePath": "_content/WebInventory",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
