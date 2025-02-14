@@ -14,8 +14,8 @@ namespace Infrastructure.Repository
     /// </summary>
     public class ModelRepository : IModelRepository, IDisposable
     {
-        private ModelContext _dbContext;
-        public ModelRepository(ModelContext context)
+        private InventoryDBContext _dbContext;
+        public ModelRepository(InventoryDBContext context)
         {
             _dbContext = context;
         }
