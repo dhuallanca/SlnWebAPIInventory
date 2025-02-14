@@ -15,3 +15,6 @@ https://dev.to/karenpayneoregon/gentle-introduction-to-generic-repository-patter
 Domain> Entities: Models, Validations, Errors
 Application: use Cases, singIng, CRUD, Infraestucture Interfaces
 Infaestructure: Repositories, shared service(Authentication, email).
+
+Identity tables:
+https://www.linkedin.com/pulse/database-structure-user-role-management-aj-february/
