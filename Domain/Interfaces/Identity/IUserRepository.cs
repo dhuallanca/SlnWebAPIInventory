@@ -1,5 +1,4 @@
-﻿using Application.Dtos;
-using Application.Interfaces;
+﻿using Domain.Identity;
 using Domain.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -7,19 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Services
+namespace Domain.Interfaces.Identity
 {
-    /// <summary>
-    /// use cases, business logic
-    /// </summary>
-    public class Service : IService
+    public class IUserRepository : IRepositoryBase<User>
     {
-        private readonly IModelRepository _repository;
-
-        public Service(IModelRepository repository)
-        {
-            _repository = repository;
-        }
         public void DeleteById(int id)
         {
             throw new NotImplementedException();
@@ -30,42 +20,42 @@ namespace Application.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ModelDto> GetAll()
+        public IEnumerable<User> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<ModelDto>> GetAllAsync()
+        public Task<IEnumerable<User>> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public ModelDto GetById(int id)
+        public User GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<ModelDto> GetByIdAsync(int id)
+        public Task<User> GetByIdAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void InsertById(ModelDto entity)
+        public void InsertById(User entity)
         {
             throw new NotImplementedException();
         }
 
-        public void InsertByIdAsync(ModelDto entity)
+        public void InsertByIdAsync(User entity)
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateById(ModelDto entity)
+        public void UpdateById(User entity)
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateByIdAsync(ModelDto entity)
+        public void UpdateByIdAsync(User entity)
         {
             throw new NotImplementedException();
         }

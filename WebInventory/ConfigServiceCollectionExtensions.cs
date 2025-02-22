@@ -1,6 +1,5 @@
 ﻿using Application.Interfaces;
 using Application.Services;
-using Infrastructure.Repository;
 
 namespace WebInventory
 {
@@ -10,8 +9,6 @@ namespace WebInventory
     public static class ConfigServiceCollectionExtensions
     {
         public static IServiceCollection AddDependencyInjection(this IServiceCollection services) {
-
-            services.AddTransient<IModelRepository, ModelRepository>();
             services.AddTransient<IService, Service>();
             return services;
         }

@@ -18,3 +18,21 @@ Infaestructure: Repositories, shared service(Authentication, email).
 
 Identity tables:
 https://www.linkedin.com/pulse/database-structure-user-role-management-aj-february/
+
+Result patter: https://www.milanjovanovic.tech/blog/functional-error-handling-in-dotnet-with-the-result-pattern
+https://www.youtube.com/watch?v=5emVIkthkDg
+https://www.youtube.com/watch?v=WCCkEe_Hy2Y
+https://www.youtube.com/watch?v=uOEDM0c9BNI
+
+new global exception:
+https://dev.to/muhammad_salem/comprehensive-guide-to-error-handling-in-aspnet-core-329
+https://www.youtube.com/watch?v=uOEDM0c9BNI
+
+Hybrid IexceptionHandler + Result Pattern
+https://dev.to/k_ribaric/net-error-handling-balancing-exceptions-and-the-result-pattern-ljo
+
+
+troubleshooting issues:
+Add EFCore.Design to webAPI to run migrations (issue with default project)
+Add TrustServerCertificate=True to connection string
+Add app.UseExceptionHandler(_ => { }); into program to use new IexceptionHandler
