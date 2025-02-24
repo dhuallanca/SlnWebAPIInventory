@@ -1,6 +1,4 @@
-﻿using Application.Interfaces;
-using Application.Services;
-using Infrastructure.Interfaces;
+﻿using Infrastructure.Interfaces;
 using WebInventory.Utilities;
 
 namespace WebInventory
@@ -11,7 +9,8 @@ namespace WebInventory
     public static class ConfigServiceCollectionExtensions
     {
         public static IServiceCollection AddDependencyInjection(this IServiceCollection services) {
-            services.AddTransient<IService, Service>();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IUserIdProvider, UserIdProvider>();
             return services;
         }

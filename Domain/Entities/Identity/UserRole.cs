@@ -1,5 +1,4 @@
-﻿
-namespace Domain.Identity
+﻿namespace Domain.Entities.Identity
 {
     public class UserRole : AuditableEntity
     {

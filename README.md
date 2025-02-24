@@ -12,6 +12,8 @@ https://medium.com/@madu.sharadika/clean-architecture-in-net-8-web-api-483979161
 
 https://dev.to/karenpayneoregon/gentle-introduction-to-generic-repository-pattern-with-c-1jn0
 
+https://medium.com/@mohanedzekry/clean-architecture-in-asp-net-core-web-api-d44e33893e1d
+
 Domain> Entities: Models, Validations, Errors
 Application: use Cases, singIng, CRUD, Infraestucture Interfaces
 Infaestructure: Repositories, shared service(Authentication, email).
@@ -31,8 +33,14 @@ https://www.youtube.com/watch?v=uOEDM0c9BNI
 Hybrid IexceptionHandler + Result Pattern
 https://dev.to/k_ribaric/net-error-handling-balancing-exceptions-and-the-result-pattern-ljo
 
+CQRS pattern:
+https://www.csharp.com/article/building-robust-asp-net-core-web-apis-with-cqrs-and-mediatr/
+https://www.csharp.com/article/cqrs-and-mediatr-pattern-implementation-using-net-core-6-web-api/
+https://codewithmukesh.com/blog/cqrs-and-mediatr-in-aspnet-core/
 
 troubleshooting issues:
 Add EFCore.Design to webAPI to run migrations (issue with default project)
 Add TrustServerCertificate=True to connection string
 Add app.UseExceptionHandler(_ => { }); into program to use new IexceptionHandler
+
+Add injection for HTttpContextAccessor services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

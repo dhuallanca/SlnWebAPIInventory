@@ -1,7 +1,9 @@
 ﻿using Application.Dtos;
 using Application.Exceptions;
+using Application.Features.Identity.Queries;
 using Application.Interfaces;
 using Domain.ResultHandler;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ModelError = Domain.Entities.ModelError;
 
@@ -15,13 +17,8 @@ namespace WebInventory.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class ModelController : BaseApiController
+    public class ModelController(IMediator _mediator) : BaseApiController
     {
-        private readonly IService _service;
-        public ModelController(IService service) {
-            _service = service;
-
-        }
         // GET: api/<ModelController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -52,20 +49,6 @@ namespace WebInventory.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-        }
-
-        //GET: api/<ModelController>/GlobalError
-        [HttpGet("/GlobalError")]
-        public string GetGlobalEror()
-        {
-            throw new Exception("General");
-        }
-
-        //GET: api/<ModelController>/NotFound
-        [HttpGet("/NotFound")]
-        public string GetNotFoundEror()
-        {
-            throw new NotFoundException("Model", 0);
         }
 
         //GET: api/<ModelController>/ResultError
@@ -100,6 +83,14 @@ namespace WebInventory.Controllers
         public string GetNotFoundError()
         {
             throw new NotFoundException("Model", 0);
+        }
+
+        //GET: api/<ModelController>/Authenticate
+        [HttpGet("/Authenticate")]
+        public async Task<IActionResult> Authenticate([FromQuery]AuthenticateQuery authenticateQuery)
+        {
+            var result = await _mediator.Send(authenticateQuery);
+            return HandleActionResult(result);
         }
     }
 }

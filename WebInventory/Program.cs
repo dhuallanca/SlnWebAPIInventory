@@ -1,3 +1,4 @@
+using Application;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using WebInventory;
@@ -11,9 +12,13 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.RegisterMapsterConfigure();
+
 // local dI
+builder.Services.RegisterMapsterConfigure();
+builder.Services.AddDependencyInyectionApplication();
 builder.Services.AddDependencyInjection();
+builder.Services.AddDependencyInjectionInfrastructure();
+
 // handle exceptions
 builder.Services.RegisterExceptionConfiguration();
 
@@ -31,7 +36,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
+// to use exceptions
 app.UseExceptionHandler(_ => { });
 
 app.Run();

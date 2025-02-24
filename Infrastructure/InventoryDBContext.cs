@@ -1,6 +1,6 @@
 ﻿using Domain;
 using Domain.Entities;
-using Domain.Identity;
+using Domain.Entities.Identity;
 using Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
