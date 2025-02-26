@@ -1,6 +1,7 @@
 ﻿using Application.Dtos;
 using Application.Interfaces;
 using Domain.Interfaces;
+using Domain.ResultHandler;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,52 +21,28 @@ namespace Application.Services
         {
             _repository = repository;
         }
-        public void DeleteById(int id)
+
+        public Task<Result<bool>> DeleteByIdAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteByIdAsync(int id)
+        public Task<Result<IEnumerable<ModelDto>>> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ModelDto> GetAll()
+        public Task<Result<ModelDto>> GetByIdAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<ModelDto>> GetAllAsync()
+        public Task<Result<int>> InsertAsync(ModelDto entity)
         {
             throw new NotImplementedException();
         }
 
-        public ModelDto GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ModelDto> GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void InsertById(ModelDto entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void InsertByIdAsync(ModelDto entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateById(ModelDto entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateByIdAsync(ModelDto entity)
+        public Task<Result<bool>> UpdateByIdAsync(ModelDto entity)
         {
             throw new NotImplementedException();
         }

@@ -2,6 +2,7 @@
 using Application.Exceptions;
 using Application.Features.Identity.Queries;
 using Application.Interfaces;
+using Domain.Interfaces;
 using Domain.ResultHandler;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +18,7 @@ namespace WebInventory.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class ModelController(IMediator _mediator) : BaseApiController
+    public class ModelController(IMediator _mediator, ICancellationTokenService cancellationToken) : BaseApiController
     {
         // GET: api/<ModelController>
         [HttpGet]
@@ -85,12 +86,6 @@ namespace WebInventory.Controllers
             throw new NotFoundException("Model", 0);
         }
 
-        //GET: api/<ModelController>/Authenticate
-        [HttpGet("/Authenticate")]
-        public async Task<IActionResult> Authenticate([FromQuery]AuthenticateQuery authenticateQuery)
-        {
-            var result = await _mediator.Send(authenticateQuery);
-            return HandleActionResult(result);
-        }
+     
     }
 }

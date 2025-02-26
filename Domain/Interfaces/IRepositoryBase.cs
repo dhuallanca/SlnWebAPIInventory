@@ -1,4 +1,5 @@
-﻿
+﻿using Domain.ResultHandler;
+
 namespace Domain.Interfaces
 {
     /// <summary>
@@ -7,15 +8,10 @@ namespace Domain.Interfaces
     /// <typeparam name="T"></typeparam>
     public interface IRepositoryBase<T> where T : class
     {
-        IEnumerable<T> GetAll();
-        Task<IEnumerable<T>> GetAllAsync();
-        T GetById(int id);
-        Task<T> GetByIdAsync(int id);
-        void DeleteById(int id);
-        void UpdateById(T entity);
-        void UpdateByIdAsync(T entity);
-        void DeleteByIdAsync(int id);
-        void InsertById(T entity);
-        void InsertByIdAsync(T entity);
+        Task<Result<IEnumerable<T>>> GetAllAsync();
+        Task<Result<T>> GetByIdAsync(int id);
+        Task<Result<bool>> UpdateByIdAsync(T entity);
+        Task<Result<bool>> DeleteByIdAsync(int id);
+        Task<Result<int>> InsertAsync(T entity);
     }
 }

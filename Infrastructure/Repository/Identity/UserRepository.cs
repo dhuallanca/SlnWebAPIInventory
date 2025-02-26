@@ -1,4 +1,5 @@
 ﻿using Domain.Entities.Identity;
+using Domain.Interfaces;
 using Domain.Interfaces.Identity;
 using Domain.ResultHandler;
 using Microsoft.EntityFrameworkCore;
@@ -10,65 +11,52 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repository.Identity
 {
-    public class UserRepository(InventoryDBContext _dbContext) : IUserRepository, IDisposable
+    public class UserRepository(InventoryDBContext _dbContext, ICancellationTokenService cancellationToken) : IUserRepository, IDisposable
     {
         public async Task<Result<User>> Authenticate(string userName, string password)
         {
-            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Name == userName &&  u.Password == password);
+            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Name == userName &&  u.IsActive == true, cancellationToken.CancellationToken);
             if (user == null) {
                 return Result<User>.Failure(UserBehavior.UserInvalid);
             }
             return Result<User>.Success(user);
         }
-
-        public void DeleteById(int id)
+        public Task<Result<IEnumerable<User>>> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteByIdAsync(int id)
+        public Task<Result<User>> GetByIdAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<User> GetAll()
+        public Task<Result<bool>> UpdateByIdAsync(User entity)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<User>> GetAllAsync()
+        public Task<Result<bool>> DeleteByIdAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public User GetById(int id)
+        public async Task<Result<int>> InsertAsync(User entity)
         {
-            throw new NotImplementedException();
-        }
+            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Name == entity.Name, cancellationToken.CancellationToken);
+            if (user != null)
+            {
+                return Result<int>.Failure(UserBehavior.UserNameAlreadyExists);
+            }
 
-        public Task<User> GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
+            if (user != null && user.Email == entity.Email)
+            {
+                return Result<int>.Failure(UserBehavior.UserEmailAlreadyExists);
+            }
+            await _dbContext.Users.AddAsync(entity, cancellationToken.CancellationToken);
+            await _dbContext.SaveChangesAsync(cancellationToken.CancellationToken);
 
-        public void InsertById(User entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void InsertByIdAsync(User entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateById(User entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateByIdAsync(User entity)
-        {
-            throw new NotImplementedException();
+            return Result<int>.Success(entity.Id);
         }
 
         private bool disposed = false;

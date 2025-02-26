@@ -1,4 +1,5 @@
-﻿using Infrastructure.Interfaces;
+﻿using Domain.Interfaces;
+using Infrastructure.Interfaces;
 using WebInventory.Utilities;
 
 namespace WebInventory
@@ -12,6 +13,7 @@ namespace WebInventory
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IUserIdProvider, UserIdProvider>();
+            services.AddScoped<ICancellationTokenService, CurrentCancellationTokenService>();
             return services;
         }
     }

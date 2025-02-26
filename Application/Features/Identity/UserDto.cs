@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Identity
 {
-    public record UserDto(int Id, string Name, string Password, string Email, string FirstName, string LastName, bool IsActive);
+    public record UserDto(int Id, string Name, string Email, string FirstName, string LastName, bool IsActive);
 }

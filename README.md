@@ -44,3 +44,7 @@ Add TrustServerCertificate=True to connection string
 Add app.UseExceptionHandler(_ => { }); into program to use new IexceptionHandler
 
 Add injection for HTttpContextAccessor services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+encrypt: https://code-maze.com/csharp-hashing-salting-passwords-best-practices/
+
+Creation CurrentCancellationTokenService to inject cancellation token
