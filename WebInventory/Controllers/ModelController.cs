@@ -1,7 +1,5 @@
 ﻿using Application.Dtos;
 using Application.Exceptions;
-using Application.Features.Identity.Queries;
-using Application.Interfaces;
 using Domain.Interfaces;
 using Domain.ResultHandler;
 using MediatR;

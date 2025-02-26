@@ -47,4 +47,23 @@ Add injection for HTttpContextAccessor services.AddSingleton<IHttpContextAccesso
 
 encrypt: https://code-maze.com/csharp-hashing-salting-passwords-best-practices/
 
+
+https://weblogs.asp.net/ricardoperes/accessing-the-httpcontext-from-a-dbcontext
+
 Creation CurrentCancellationTokenService to inject cancellation token
+
+
+get user id:
+https://fiseni.com/posts/current-user-aspnetcore/
+
+Jwtoken:
+
+https://medium.com/@madu.sharadika/authentication-and-authorization-in-net-web-api-with-jwt-b46ef2f54e31
+
+https://learn.microsoft.com/en-us/aspnet/core/security/authentication/configure-jwt-bearer-authentication?view=aspnetcore-9.0
+
+https://medium.com/@sajadshafi/jwt-authentication-in-c-net-core-7-web-api-b825b3aee11d
+
+https://curity.io/resources/learn/dotnet-api/
+
+https://github.com/patrickgod/JwtWebApiDotNet7/blob/master/JwtWebApiDotNet7/appsettings.json

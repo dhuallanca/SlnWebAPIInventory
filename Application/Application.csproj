@@ -7,17 +7,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Domain\Domain.csproj" />
+    <Compile Remove="Dtos\RequestModels\**" />
+    <Compile Remove="Dtos\ResponseModels\**" />
+    <EmbeddedResource Remove="Dtos\RequestModels\**" />
+    <EmbeddedResource Remove="Dtos\ResponseModels\**" />
+    <None Remove="Dtos\RequestModels\**" />
+    <None Remove="Dtos\ResponseModels\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Dtos\ResponseModels\" />
-    <Folder Include="Dtos\RequestModels\" />
+    <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Mapster" Version="7.4.0" />
     <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.13" />
   </ItemGroup>
 
 </Project>

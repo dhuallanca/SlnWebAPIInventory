@@ -18,6 +18,7 @@ builder.Services.RegisterMapsterConfigure();
 builder.Services.AddDependencyInyectionApplication();
 builder.Services.AddDependencyInjection();
 builder.Services.AddDependencyInjectionInfrastructure();
+builder.Services.AddJwtAuthentication(builder.Configuration);
 
 // handle exceptions
 builder.Services.RegisterExceptionConfiguration();
@@ -32,7 +33,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
