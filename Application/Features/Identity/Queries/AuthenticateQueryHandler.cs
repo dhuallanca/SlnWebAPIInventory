@@ -23,15 +23,15 @@ namespace Application.Features.Identity.Queries
                 return Result<AuthenticateDto>.Failure(result.Error);
             }
 
-            var isAutehnticated = VerifyPassword(request.Password, result.Model?.Password, result.Model?.Salt);
+            var isAutehnticated = VerifyPassword(request.Password, result.Model?.User.Password, result.Model?.User.Salt);
 
             if (!isAutehnticated)
             {
                 return Result<AuthenticateDto>.Failure(UserBehavior.UserInvalid);
             }
-            var user = result.Model;
-            var token = GenerateJwtoken(user);
-            var authenticate = new AuthenticateDto(user.Id, user.Name, user.Email, token, expirationTime);
+            var userRole = result.Model;
+            var token = GenerateJwtoken(userRole.User, userRole.Role.Name);
+            var authenticate = new AuthenticateDto(userRole.User.Id, userRole.User.Name, userRole.User.Email, token, expirationTime, userRole.Role.Name);
 
             return Result<AuthenticateDto>.Success(authenticate);
         }
@@ -44,7 +44,7 @@ namespace Application.Features.Identity.Queries
             return CryptographicOperations.FixedTimeEquals(hashToCompare, Convert.FromHexString(hashedPassword));
         }
 
-        string GenerateJwtoken(User user)
+        string GenerateJwtoken(User user, string role)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Authentication:Jwt:SecretKey"]));
             var credential = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -53,7 +53,8 @@ namespace Application.Features.Identity.Queries
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.Name!),
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.UserData, user.Name)
+                new Claim(ClaimTypes.UserData, user.Name),
+                new Claim(ClaimTypes.Role, role)
             };
 
             var token = new JwtSecurityToken(

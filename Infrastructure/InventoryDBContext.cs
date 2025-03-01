@@ -1,6 +1,7 @@
 ﻿using Domain;
-using Domain.Entities;
+using Domain.Entities.Entreprise;
 using Domain.Entities.Identity;
+using Domain.Entities.Products;
 using Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -14,6 +15,10 @@ namespace Infrastructure
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<RolePermission> RolePermissions { get; set; }
+        public DbSet<Subsidiary> Subsidiaries { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductSubsidiary> ProductSubsidiaries { get; set; }
 
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
@@ -25,7 +30,6 @@ namespace Infrastructure
                     case EntityState.Added:
                         entry.Entity.CreatedBy = userIdProvider.ToString();
                         entry.Entity.Created = DateTime.Now;
-
                         break;
 
                     case EntityState.Modified:

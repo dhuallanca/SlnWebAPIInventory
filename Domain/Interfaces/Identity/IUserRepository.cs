@@ -5,6 +5,6 @@ namespace Domain.Interfaces.Identity
 {
     public interface IUserRepository : IRepositoryBase<User>
     {
-        Task<Result<User>> Authenticate(string userName, string password);
+        Task<Result<UserRole>> Authenticate(string userName, string password);
     }
 }

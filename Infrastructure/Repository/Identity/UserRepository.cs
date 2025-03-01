@@ -13,13 +13,14 @@ namespace Infrastructure.Repository.Identity
 {
     public class UserRepository(InventoryDBContext _dbContext, ICancellationTokenService cancellationToken) : IUserRepository, IDisposable
     {
-        public async Task<Result<User>> Authenticate(string userName, string password)
+        public async Task<Result<UserRole>> Authenticate(string userName, string password)
         {
             var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Name == userName &&  u.IsActive == true, cancellationToken.CancellationToken);
             if (user == null) {
-                return Result<User>.Failure(UserBehavior.UserInvalid);
+                return Result<UserRole>.Failure(UserBehavior.UserInvalid);
             }
-            return Result<User>.Success(user);
+            var userRole = await _dbContext.UserRoles.FirstOrDefaultAsync(u=> u.UserId == user.Id);
+            return Result<UserRole>.Success(userRole);
         }
         public Task<Result<IEnumerable<User>>> GetAllAsync()
         {
@@ -53,6 +54,7 @@ namespace Infrastructure.Repository.Identity
             {
                 return Result<int>.Failure(UserBehavior.UserEmailAlreadyExists);
             }
+            user.IsActive = true;
             await _dbContext.Users.AddAsync(entity, cancellationToken.CancellationToken);
             await _dbContext.SaveChangesAsync(cancellationToken.CancellationToken);
 
