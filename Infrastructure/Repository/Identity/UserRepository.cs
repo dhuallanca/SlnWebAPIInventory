@@ -8,39 +8,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace Infrastructure.Repository.Identity
 {
-    public class UserRepository(InventoryDBContext _dbContext, ICancellationTokenService cancellationToken) : IUserRepository, IDisposable
+    public class UserRepository(InventoryDBContext _dbContext, ICancellationTokenService cancellationToken) : RepositoryBase<User>(_dbContext, cancellationToken), IUserRepository
     {
         public async Task<Result<UserRole>> Authenticate(string userName, string password)
         {
-            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Name == userName &&  u.IsActive == true, cancellationToken.CancellationToken);
+            var user = await _dbContext.Users.Include(u => u.UserRoles).FirstOrDefaultAsync(u => u.Name == userName &&  u.IsActive == true, cancellationToken.CancellationToken);
             if (user == null) {
                 return Result<UserRole>.Failure(UserBehavior.UserInvalid);
             }
-            var userRole = await _dbContext.UserRoles.FirstOrDefaultAsync(u=> u.UserId == user.Id);
+            var userRole = await _dbContext.UserRoles.Include(r=> r.Role).FirstOrDefaultAsync(u=> u.UserId == user.Id);
             return Result<UserRole>.Success(userRole);
         }
-        public Task<Result<IEnumerable<User>>> GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Result<User>> GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Result<bool>> UpdateByIdAsync(User entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Result<bool>> DeleteByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public async Task<Result<int>> InsertAsync(User entity)
         {
@@ -54,31 +37,13 @@ namespace Infrastructure.Repository.Identity
             {
                 return Result<int>.Failure(UserBehavior.UserEmailAlreadyExists);
             }
-            user.IsActive = true;
-            await _dbContext.Users.AddAsync(entity, cancellationToken.CancellationToken);
-            await _dbContext.SaveChangesAsync(cancellationToken.CancellationToken);
+            entity.IsActive = true;
+            await base.InsertAsync(entity);
+            //await _dbContext.Users.AddAsync(entity, cancellationToken.CancellationToken);
+            //await _dbContext.SaveChangesAsync(cancellationToken.CancellationToken);
 
             return Result<int>.Success(entity.Id);
         }
 
-        private bool disposed = false;
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    _dbContext.Dispose();
-                }
-            }
-            this.disposed = true;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
     }
 }
