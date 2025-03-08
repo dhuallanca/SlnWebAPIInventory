@@ -22,16 +22,17 @@ namespace Application.Features.Identity.Queries
             {
                 return Result<AuthenticateDto>.Failure(result.Error);
             }
-
-            var isAutehnticated = VerifyPassword(request.Password, result.Model?.User.Password, result.Model?.User.Salt);
+            var user = result.Model;
+            var isAutehnticated = VerifyPassword(request.Password, user!.Password, user!.Salt);
 
             if (!isAutehnticated)
             {
                 return Result<AuthenticateDto>.Failure(UserBehavior.UserInvalid);
             }
-            var userRole = result.Model;
-            var token = GenerateJwtoken(userRole.User, userRole.Role.Name);
-            var authenticate = new AuthenticateDto(userRole.User.Id, userRole.User.Name, userRole.User.Email, token, expirationTime, userRole.Role.Name);
+            
+            var role = user.Roles.FirstOrDefault()?.Name ?? "";
+            var token = GenerateJwtoken(user, role);
+            var authenticate = new AuthenticateDto(user.Id, user.Name, user.Email, token, expirationTime, role);
 
             return Result<AuthenticateDto>.Success(authenticate);
         }

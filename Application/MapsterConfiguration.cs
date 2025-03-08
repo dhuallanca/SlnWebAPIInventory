@@ -11,7 +11,7 @@ namespace Application
     {
         public static void RegisterMapsterConfigure(this IServiceCollection services)
         {
-            TypeAdapterConfig<Model, ModelDto>.NewConfig();
+            // TypeAdapterConfig<Model, ModelDto>.NewConfig();
 
             TypeAdapterConfig.GlobalSettings.Scan(Assembly.GetExecutingAssembly());
         }

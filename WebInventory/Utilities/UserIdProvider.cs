@@ -1,9 +1,17 @@
 ﻿using Infrastructure.Interfaces;
+using System.Security.Claims;
 
 namespace WebInventory.Utilities
 {
     public class UserIdProvider(IHttpContextAccessor contextAccessor) : IUserIdProvider
     {
-        public int UserId => (int)(contextAccessor.HttpContext?.Items["userid"] ?? 0);
+        public string UserId
+        {
+            get
+            {
+                var identity = contextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.Name);
+                return identity ?? "not user";
+            }
+        }
     }
 }

@@ -28,12 +28,12 @@ namespace Infrastructure
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        entry.Entity.CreatedBy = userIdProvider.ToString();
+                        entry.Entity.CreatedBy = userIdProvider.UserId;
                         entry.Entity.Created = DateTime.Now;
                         break;
 
                     case EntityState.Modified:
-                        entry.Entity.LastModifiedBy = userIdProvider.ToString();
+                        entry.Entity.LastModifiedBy = userIdProvider.UserId;
                         entry.Entity.LastModified = DateTime.Now;
                         break;
                 }

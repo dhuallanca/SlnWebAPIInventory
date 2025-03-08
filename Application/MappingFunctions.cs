@@ -1,8 +1,4 @@
-﻿using Application.Dtos;
-using Application.Features.Identity;
-using Domain.Entities;
-using Domain.Entities.Identity;
-using Mapster;
+﻿using Mapster;
 
 namespace Application
 {
@@ -16,13 +12,13 @@ namespace Application
             return model.Adapt<M>();
         }
 
-        public static UserDto MapUserToDto(User model)
-        {
-            return model.Adapt<UserDto>();
-        }
-        public static User MapUseDtoToModel(UserDto model)
-        {
-            return model.Adapt<User>();
-        }
+        //public static UserDto MapUserToDto(User model)
+        //{
+        //    return model.Adapt<UserDto>();
+        //}
+        //public static User MapUseDtoToModel(UserDto model)
+        //{
+        //    return model.Adapt<User>();
+        //}
     }
 }

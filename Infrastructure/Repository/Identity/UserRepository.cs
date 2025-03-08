@@ -14,14 +14,14 @@ namespace Infrastructure.Repository.Identity
 {
     public class UserRepository(InventoryDBContext _dbContext, ICancellationTokenService cancellationToken) : RepositoryBase<User>(_dbContext, cancellationToken), IUserRepository
     {
-        public async Task<Result<UserRole>> Authenticate(string userName, string password)
+        public async Task<Result<User>> Authenticate(string userName, string password)
         {
-            var user = await _dbContext.Users.Include(u => u.UserRoles).FirstOrDefaultAsync(u => u.Name == userName &&  u.IsActive == true, cancellationToken.CancellationToken);
+            var user = await _dbContext.Users.Include(u => u.UserRoles).Include(u => u.Roles).FirstOrDefaultAsync(u => u.Name == userName &&  u.IsActive == true, cancellationToken.CancellationToken);
             if (user == null) {
-                return Result<UserRole>.Failure(UserBehavior.UserInvalid);
+                return Result<User>.Failure(UserBehavior.UserInvalid);
             }
-            var userRole = await _dbContext.UserRoles.Include(r=> r.Role).FirstOrDefaultAsync(u=> u.UserId == user.Id);
-            return Result<UserRole>.Success(userRole);
+            
+            return Result<User>.Success(user);
         }
        
 

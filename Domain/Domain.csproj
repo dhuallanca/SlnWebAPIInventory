@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Interfaces\Entrreprise\ISubsidiaryRepository.cs~RF1b0bc317.TMP" />
+  </ItemGroup>
+
 </Project>
