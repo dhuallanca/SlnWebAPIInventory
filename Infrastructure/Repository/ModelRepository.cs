@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces;
 using Domain.ResultHandler;
+using System.Linq.Expressions;
 
 namespace Infrastructure.Repository
 {
@@ -22,11 +23,6 @@ namespace Infrastructure.Repository
         }
 
         public Task<IList<Model>> GetModels()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Result<IEnumerable<Model>>> GetAllAsync()
         {
             throw new NotImplementedException();
         }
@@ -69,6 +65,11 @@ namespace Infrastructure.Repository
         {
             Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        public Task<Result<IEnumerable<Model>>> GetAllAsync(Expression<Func<Model, bool>>? filter = null)
+        {
+            throw new NotImplementedException();
         }
     }
 }

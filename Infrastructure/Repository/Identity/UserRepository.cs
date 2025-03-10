@@ -27,7 +27,7 @@ namespace Infrastructure.Repository.Identity
 
         public async Task<Result<int>> InsertAsync(User entity)
         {
-            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Name == entity.Name, cancellationToken.CancellationToken);
+            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Name == entity.Name && u.IsActive == true, cancellationToken.CancellationToken);
             if (user != null)
             {
                 return Result<int>.Failure(UserBehavior.UserNameAlreadyExists);

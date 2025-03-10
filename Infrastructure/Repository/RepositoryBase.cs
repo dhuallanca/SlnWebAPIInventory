@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,14 +25,26 @@ namespace Infrastructure.Repository
             return Result<bool>.Success(true);
         }
 
-        public Task<Result<IEnumerable<T>>> GetAllAsync()
+        public async Task<Result<IEnumerable<T>>> GetAllAsync(Expression<Func<T, bool>>? filter = null)
         {
-            throw new NotImplementedException();
+            if (filter == null)
+            {
+                var list = await dbSet.ToListAsync();
+                return Result<IEnumerable<T>>.Success(list);
+            }
+            IQueryable<T> query = dbSet;
+            var result =  await query.Where(filter).ToListAsync();
+            return Result<IEnumerable<T>>.Success(result);
         }
 
-        public Task<Result<T>> GetByIdAsync(int id)
+        public async Task<Result<T>> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var entity = await dbSet.FindAsync(id);
+            if (entity == null)
+            {
+                return Result<T>.Failure(GeneralError.DoesntExists);
+            }
+            return Result<T>.Success(entity);
         }
 
         public async Task<Result<int>> InsertAsync(T entity)

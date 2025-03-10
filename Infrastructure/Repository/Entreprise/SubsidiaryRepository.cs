@@ -10,7 +10,7 @@ namespace Infrastructure.Repository.Entreprise
     {
         public async Task<bool> NameExistsAsync(string name)
         {
-            var subsidiary = await dbContext.Subsidiaries.FirstOrDefaultAsync(s => s.Name.Equals(name));
+            var subsidiary = await dbContext.Subsidiaries.FirstOrDefaultAsync(s => s.Name.Equals(name) && s.IsActive);
 
             if (subsidiary != null) {
                 return true;

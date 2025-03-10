@@ -18,6 +18,7 @@ namespace Application.Features.Entreprise.Commands
         public async Task<Result<SubsidiaryDto>> Handle(CreateSubsidiaryCommand request, CancellationToken cancellationToken)
         {
             var subsidiary = request.Adapt<Subsidiary>();
+            subsidiary.IsActive = true;
             var exists = await subsidiaryRepository.NameExistsAsync(subsidiary.Name);
             if (exists) {
                 return Result<SubsidiaryDto>.Failure(SubsidiaryBehavior.SubsidiaryExists);

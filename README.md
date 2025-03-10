@@ -67,3 +67,8 @@ https://medium.com/@sajadshafi/jwt-authentication-in-c-net-core-7-web-api-b825b3
 https://curity.io/resources/learn/dotnet-api/
 
 https://github.com/patrickgod/JwtWebApiDotNet7/blob/master/JwtWebApiDotNet7/appsettings.json
+
+Unit of work:
+https://learn.microsoft.com/en-us/aspnet/mvc/overview/older-versions/getting-started-with-ef-5-using-mvc-4/implementing-the-repository-and-unit-of-work-patterns-in-an-asp-net-mvc-application
+
+https://www.youtube.com/watch?v=7nM7E-c7vYw

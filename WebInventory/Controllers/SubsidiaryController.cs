@@ -1,4 +1,5 @@
 ﻿using Application.Features.Entreprise.Commands;
+using Application.Features.Entreprise.Queries;
 using Domain.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -15,9 +16,11 @@ namespace WebInventory.Controllers
     {
         // GET: api/<SubsidiaryController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> Get()
         {
-            return new string[] { "value1", "value2" };
+            var getListQuery = new GetListSubsidiaryQuery(IsActive: true);
+            var result = await _mediator.Send(getListQuery, cancellationToken.CancellationToken);
+            return HandleActionResult(result);
         }
 
         // GET api/<SubsidiaryController>/5

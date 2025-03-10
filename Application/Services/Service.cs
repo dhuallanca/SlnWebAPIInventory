@@ -5,6 +5,7 @@ using Domain.ResultHandler;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,7 +28,7 @@ namespace Application.Services
             throw new NotImplementedException();
         }
 
-        public Task<Result<IEnumerable<ModelDto>>> GetAllAsync()
+        public Task<Result<IEnumerable<ModelDto>>> GetAllAsync(Expression<Func<ModelDto, bool>>? filter = null)
         {
             throw new NotImplementedException();
         }
